@@ -1,0 +1,20 @@
+{
+  "name": "purecss-gulp",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Ryan McCormick <ryan.mccormick@optum.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "purecss-sass": "^0.6.2"
+  }
+}
