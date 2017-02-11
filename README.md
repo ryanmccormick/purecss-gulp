@@ -1,8 +1,6 @@
-# Blog Layout Design PureCSS
+# Pure CSS Sass with Gulp Build Process
 ---
 
-## Pure CSS Sass with Gulp Build Process
----
 ...Desc to be updated
 
 ## To install
