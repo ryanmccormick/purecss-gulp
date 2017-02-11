@@ -401,7 +401,28 @@ gulp.task('serve:dev', function(callback) {
               callback);
 });
 
-gulp.task('dev-clean', require('del').bind(null, [path.tmp], { force: true}));
+gulp.task('dev-clean', require('del').bind(null, [path.tmp], { force: true, dot: true}));
+
+
+// gulp.task('dev-clean', function() {
+//   var del = require('del');
+
+//   del([path.tmp], { force: true, dot: true }).then(function(data) {
+//     console.log(paths.join('\n'));
+//   });
+
+  // del.bind(null, [path.tmp], { force: true }).then(function(data) {
+  //   console.log(data);
+  // });
+
+  /*
+  del(['tmp/*.js', '!tmp/unicorn.js']).then(paths => {
+    console.log('Deleted files and folders:\n', paths.join('\n'));
+});
+
+  */
+
+//});
 
 gulp.task('dev-index', function() {
   return gulp.src('src/index.html')
@@ -466,11 +487,12 @@ gulp.task('dev-images', function() {
     .pipe(gulp.dest(path.tmp + 'images'))
     .pipe(browserSync.stream());
 });
-
+//'/app': 'src/app'
 
 gulp.task('dev-watch', function() {
   var routes = {
-    '/bower_components': 'bower_components'
+    '/bower_components': 'bower_components',
+    '/assets/scripts': 'src/assets/scripts'
   };
   var baseDir = '.tmp';
 
@@ -505,6 +527,16 @@ gulp.task('dev-watch', function() {
 
   // Watch for new images
   gulp.watch('src/assets/images/*.*', ['dev-images']);
+
+  gulp.watch('src/assets/scripts/*.*', ['dev-app-inject']);
+
+  // Watch index file for changes
+  gulp.watch('src/index.html', ['dev-clean',
+                                'dev-index',
+                                'dev-css',
+                                ['dev-fonts', 'dev-images'],
+                                'dev-app-inject',
+                                'dev-bower-inject']);
   
   // Watch for bower package updates
   gulp.watch('bower.json', ['dev-bower-inject']);
